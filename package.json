@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js",
+    "dev": "nodemon --ignore sessions index.js",
     "db:create": "createdb grocery-app",
     "db:init": "psql -f schema.sql grocery-app && psql -f seed.sql grocery-app",
     "db:destroy": "dropdb grocery-app",
