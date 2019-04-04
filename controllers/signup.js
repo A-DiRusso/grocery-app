@@ -5,6 +5,13 @@ async function  createNewUser(req, res) {
     if (newUser === null) {
         const newPassword = User.hashPassword(req.body.password);
         await User.insertUser(req.body.firstname, req.body.lastname, req.body.email, newPassword);
+//save email to session
+        req.session.email = req.body.email;
+        req.session.save( async () => {
+            res.render('login',{locals:{message:"Please Log in",email:req.session.email}})
+        })
+//send them to login with email filled
+
     } else {
         res.render('login', {locals: {message: 'Looks like we know each other, please log in', email:req.body.email}})
     }

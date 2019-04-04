@@ -83,22 +83,24 @@ class User {
             ON S.id = US.store_id
             INNER JOIN users as U
             ON US.user_id = U.id
-            where user_id = ${this.id}`)
+            where user_id = $1`,[this.id])
             //and transform them to review objects
-                .then((arrayOfToDos) => {
+                .then((arrayOfStores) => {
                     //convert each array element into a Review instance
-                    const arrayOfToDoInstances = [];
+                    const arrayOfStoreInstances = [];
                     //manually mapping
-                    arrayOfToDos.forEach((data) => {
-                        const toDoInstance = new ToDo (data.id,  data.user_id, data.task, data.complete);
-                        arrayOfToDoInstances.push(toDoInstance);
+                    arrayOfStores.forEach((data) => {
+                        console.log(data);
+                        const StoreInstance = new Store (data.id,  data.store_name);
+                        arrayOfStoreInstances.push(StoreInstance);
                     })
-                    console.log(arrayOfToDoInstances);
-                    return arrayOfToDoInstances;
+                    // console.log(arrayOfStoreInstances);
+                    return arrayOfStoreInstances;
                 })
                 //what happens when there are NO results??
     }
 };
+
 
 
 

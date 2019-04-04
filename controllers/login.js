@@ -18,7 +18,10 @@ console.log("inside save function");
     
             //if the user exists, check password
             if (theUser.checkPassword(req.body.password)) {
-                console.log("PASSWORD VALID");
+                // console.log("PASSWORD VALID");
+                //get the list of stores for that user
+                const userStores = await theUser.stores;
+                console.log(userStores);
                 res.render('main',{locals:{user:theUser.firstName}})
             }
             //wrong password

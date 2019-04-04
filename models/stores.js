@@ -9,7 +9,7 @@ const usersStores = require('./users-stores');
 class Store {
     constructor (id, storeName) {
         this.id = id;
-        this.storeName = store_name;   
+        this.storeName = storeName;   
        
     } 
     static getById(id) {

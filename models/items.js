@@ -56,25 +56,6 @@ class Item {
         values  ($1, $2, $3, $4)`, [firstName, lastName, email, password])
     }
 
-    get items() {
-        return db.any(`SELECT * from items as I
-            INNER JOIN stores as S 
-            ON I.store_id = S.id
-            where S.id = $1`, [this.id])
-        //and transform them to review objects
-            .then((arrayOfItems) => {
-                //convert each array element into a Review instance
-                const arrayOfItemsInstances = [];
-                //manually mapping
-                arrayOfItems.forEach((data) => {
-                    const itemsInstance = new Item (data.id,  data.storeId, data.item, data.quantity, data.comments, data,checked);
-                    arrayOfItemsInstances.push(itemsInstance);
-                });
-                console.log(arrayOfItemsInstances);
-                return arrayOfItemsInstances;
-            });
-            //what happens when there are NO results??
-}
 }
 
 
