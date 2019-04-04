@@ -13,6 +13,30 @@ async function  loadMainPage(req, res) {
 
     //then render main with session vars and items.
 }
-///comment,...
 
-module.exports = loadMainPage;
+async function deleteAStore (req, res) {
+    //the id will come on the req.params.id
+
+    //to delete a store, you need to delete all items for that store
+    //then delete the user-store references
+    //then delete the store record...
+
+    //then re-render the main page with the new list of stores
+
+    //re pull the stores based on req.sessions.id -- this is the user id.
+    
+    //and resave the stores in session
+    req.session.stores = userStores;
+
+    res.render('main',{locals:{user:req.session.user,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
+
+}
+mainRouter.post('/add/item', addItem)
+
+
+
+module.exports = { loadMainPage,
+deleteAStore,
+deleteAnItem,
+addStore,
+addItem};

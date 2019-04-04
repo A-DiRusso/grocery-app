@@ -7,9 +7,9 @@ function showLoginPage (req, res) {
 async function verifyUser  (req, res) {
     //set session email
     req.session.email = req.body.email;
-console.log('before save session function')
+
     req.session.save( async () => { 
-console.log("inside save function");
+
         //get the email from the post body
         // console.log(req.body.email);
         const theUser = await User.getByEmail(`${req.body.email}`);
@@ -20,12 +20,15 @@ console.log("inside save function");
             if (theUser.checkPassword(req.body.password)) {
                 // console.log("PASSWORD VALID");
                 //get the list of stores for that user
-                const userStores = await theUser.stores;
-                console.log(userStores);
-                console.log(userStores[0].storeName);
+                const userStores = await theUser.stores;  //get a list of stores
+
+                // console.log(userStores);
+                // console.log(userStores[0].storeName);
+
                 //store the store array in session
                 req.session.stores = userStores;
                 req.session.user=theUser.firstName;
+                req.session.userID = theUser.id;
                 req.session.save( () => {
                     res.render('main',{locals:{user:theUser.firstName,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
 
