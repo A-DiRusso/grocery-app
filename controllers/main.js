@@ -13,5 +13,6 @@ async function  loadMainPage(req, res) {
 
     //then render main with session vars and items.
 }
+///comment,...
 
 module.exports = loadMainPage;
