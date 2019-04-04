@@ -90,8 +90,8 @@ class User {
                     const arrayOfStoreInstances = [];
                     //manually mapping
                     arrayOfStores.forEach((data) => {
-                        console.log(data);
-                        const StoreInstance = new Store (data.id,  data.store_name);
+                        // console.log(data);
+                        const StoreInstance = new Store (data.store_id,  data.store_name);
                         arrayOfStoreInstances.push(StoreInstance);
                     })
                     // console.log(arrayOfStoreInstances);

@@ -31,24 +31,14 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="card mb-6 shadow-sm" style="overflow-y: auto; max-height: 250px;">
-                          <ul style="max-height: 200px;">
-                              <li>a</li>
-                              <li>a</li>
-                              <li>b</li>
-                              <li>d</li>
-                              <li>3</li>
-                              <li>4</li>
-                              <li>5</li>
-                              <li>5</li>
-                              <li>a</li>
-                              <li>a</li>
-                              <li>b</li>
-                              <li>d</li>
-                              <li>3</li>
-                              <li>4</li>
-                              <li>5</li>
-                              <li>5</li>
-                          </ul>
+
+                            <ul style="max-height: 200px;min-height: 200px;">
+ 
+
+                            ${stores.map((store) =>  `<li><form action="/main" method="POST"><input name="id" value="${store.id}" style="display:none;"><button type="submit" >${store.storeName}</button></form></li>`).join(' ')}
+        
+                            </ul>
+                         
                         </div>
                           <div class="card-body">
                             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -64,23 +54,18 @@
                       </div>
                       <div class="col-md-6">
                             <div class="card mb-6 shadow-sm" style="overflow-y: auto; max-height: 250px;">
-                              <ul style="max-height: 200px;">
-                                  <li>a</li>
-                                  <li>a</li>
-                                  <li>b</li>
-                                  <li>d</li>
-                                  <li>3</li>
-                                  <li>4</li>
-                                  <li>5</li>
-                                  <li>5</li>
-                                  <li>a</li>
-                                  <li>a</li>
-                                  <li>b</li>
-                                  <li>d</li>
-                                  <li>3</li>
-                                  <li>4</li>
-                                  <li>5</li>
-                                  <li>5</li>
+                              <ul style="max-height: 200px;min-height: 200px;">
+                                    <ul style="max-height: 200px;min-height: 200px;">
+
+
+                                          
+                                                    ${items.map((item) =>  `<li>${item.item}</li>`).join(' ')}
+                    
+                                          
+            
+                                      </ul>
+
+                                 
                               </ul>
                             </div>
                               <div class="card-body">

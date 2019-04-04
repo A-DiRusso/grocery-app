@@ -50,24 +50,32 @@ class Store {
         values  ($1, $2, $3, $4)`, [firstName, lastName, email, password])
     }
 
-    get items() {
+    static items(id) {
         return db.any(`SELECT * from items as I
             INNER JOIN stores as S 
             ON I.store_id = S.id
-            where S.id = $1`, [this.id])
+            where S.id = $1`, [id])
         //and transform them to review objects
             .then((arrayOfItems) => {
                 //convert each array element into a Review instance
                 const arrayOfItemsInstances = [];
                 //manually mapping
                 arrayOfItems.forEach((data) => {
-                    console.log("Data Item from SQL__________________-");
-                    console.log(data);
+                    // console.log("Data Item from SQL__________________-");
+                    // console.log(data);
                     const itemsInstance = new Item (data.id,  data.store_id, data.item, data.quantity, data.comments, data.checked);
                     arrayOfItemsInstances.push(itemsInstance);
                 });
-                console.log(arrayOfItemsInstances);
-                return arrayOfItemsInstances;
+                // console.log(arrayOfItemsInstances);
+                if (arrayOfItems) {
+
+                    return arrayOfItemsInstances;
+                }
+                else {
+                    const dummy = new Item (999,999,'create list item below',"",0);
+                    arrayOfItemsInstances.push(dummy);
+                    return arrayOfItemsInstances;
+                }
             });
             //what happens when there are NO results??
 }

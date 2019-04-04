@@ -22,7 +22,14 @@ console.log("inside save function");
                 //get the list of stores for that user
                 const userStores = await theUser.stores;
                 console.log(userStores);
-                res.render('main',{locals:{user:theUser.firstName}})
+                console.log(userStores[0].storeName);
+                //store the store array in session
+                req.session.stores = userStores;
+                req.session.user=theUser.firstName;
+                req.session.save( () => {
+                    res.render('main',{locals:{user:theUser.firstName,stores:userStores,items:[{item:"create New Item"}]}});
+
+                })
             }
             //wrong password
             else {
