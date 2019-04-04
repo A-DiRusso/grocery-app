@@ -32,6 +32,27 @@ class User {
                 return null;  //signal an invalid value
             });
     }
+
+    static getByEmail(email) {
+        //db.ANY always returns an array
+        // return db.any(`SELECT * FROM users WHERE id=${id}`);  //returns array w/ object
+        //instead use db.ONE when you are returning ONE thing
+        return db.one(`SELECT * FROM users WHERE email=$1`,[email])  //returns an object
+            .then((userData)=> {
+                console.log(userData);
+                        //this NEW calls the CONSTRUCTOR
+                const userInstance = new User(userData.id, userData.first_name, userData.last_name, userData.email, userData.password);    
+                // console.log(userData.id);
+                // console.log(userInstance);
+                return userInstance;    
+            })
+            .catch((error) => {
+                return null;  //signal an invalid value
+            });
+    }
+
+
+
     //no 'static' since this is an instance method.  it belongs to the instance, not the class
     save() {
         //db.result - gives you the number of rows affected
