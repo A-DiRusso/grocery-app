@@ -1,8 +1,8 @@
 
 const db = require('./conn');  //requre the conn.js file
 const bcrypt = require('bcryptjs');
-const stores = require('./stores');
-const items = require('./items');
+const Store = require('./stores');
+const Item = require('./items');
 const usersStores = require('./users-stores');
 
 //this will have all the fields as parameters
