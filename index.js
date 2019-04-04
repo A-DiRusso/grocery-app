@@ -10,10 +10,25 @@ app.set('view engine','html');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
+app.use(session( {
+    store: new FileStore(),   //no options for now
+    secret: 'mygreatlist'    }      //just a random string to help encrypt
+));
+
+
+
+const loginRouter = require('./routes/login');
+
+
+
 //allow you to get req.body parameters from POST form
 app.use(express.urlencoded({extended:true}));
 
 
+//login page
+app.use('/login',loginRouter);
+
+//default for all other pages
 app.all('*',(req, res) => {
     res.render('index');
 })
