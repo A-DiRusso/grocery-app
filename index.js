@@ -18,7 +18,7 @@ app.use(session( {
 
 
 const loginRouter = require('./routes/login');
-
+const signUpRouter = require('./routes/signup');
 
 
 //allow you to get req.body parameters from POST form
@@ -27,8 +27,10 @@ app.use(express.urlencoded({extended:true}));
 
 //login page
 app.use('/login',loginRouter);
+//sign up page
+app.use('/signup', signUpRouter);
 
-//default for all other pages
+//default for all other pages'
 app.all('*',(req, res) => {
     res.render('index');
 })

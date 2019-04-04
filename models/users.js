@@ -63,8 +63,16 @@ class User {
                     password = '${this.password}'
                      where id = ${this.id}`);
     }
+    static insertUser (firstName, lastName, email, password) {
+        return db.result(`insert into users
+        (first_name, last_name, email, password)
+        values  ($1, $2, $3, $4)`, [firstName, lastName, email, password])
+    }
     setPassword(password) {
         this.password = bcrypt.hashSync(password, 10);  //10 is my salt
+    }
+    static hashPassword(password) {
+        return bcrypt.hashSync(password, 10);  //10 is my salt
     }
     checkPassword(password) {
         return bcrypt.compareSync(password,this.password);
