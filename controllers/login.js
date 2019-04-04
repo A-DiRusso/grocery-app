@@ -27,7 +27,7 @@ console.log("inside save function");
                 req.session.stores = userStores;
                 req.session.user=theUser.firstName;
                 req.session.save( () => {
-                    res.render('main',{locals:{user:theUser.firstName,stores:userStores,items:[{item:"create New Item"}]}});
+                    res.render('main',{locals:{user:theUser.firstName,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
 
                 })
             }
