@@ -15,7 +15,11 @@ async function verifyUser  (req, res) {
         const theUser = await User.getByEmail(`${req.body.email}`);
         // console.log(theUser);
     
-    
+        console.log("theUser for bad email", theUser);
+        //if the user not found, redirect to the signup page
+        if (theUser === null) {
+            res.redirect('/signup');
+        }
             //if the user exists, check password
             if (theUser.checkPassword(req.body.password)) {
                 // console.log("PASSWORD VALID");
