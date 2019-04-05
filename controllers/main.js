@@ -77,7 +77,8 @@ async function deleteAStore (req, res) {
     console.log("Saving session variables");
     req.session.save( () => {
 
-        res.render('main',{locals:{user:req.session.user,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
+        // res.render('main',{locals:{user:req.session.user,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
+        res.render('main',{locals:{user:req.session.user,storeName:null,stores:userStores,items:[]}});
     })
 
 
