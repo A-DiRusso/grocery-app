@@ -85,10 +85,19 @@ class Store {
             //what happens when there are NO results??
 }
 static addStore(name) {
-    const newStore = db.result(`INSERT into stores (name) values ($1) returning id`, [name]);
-    console.log(newStore);  //we need the ID from this...
-    //add the user-store entry in the user-stores table - this goes in th4e user-stores.js
-    //this needs to add the store to the store table AND
+    return db.result(`INSERT into stores (store_name) values ($1) returning id`, [name])
+    
+    .then((idOfStore) => {
+        // console.log("object from sql add", idOfStore)
+        console.log("the insert worked");
+        //this works, don't change it
+        console.log(`new store id is ${idOfStore.rows[0].id}`);
+        return idOfStore.rows[0].id;
+    })
+
+    
+    //we need the ID from this...
+    // console.log(newStore);  
 
 }
 static deleteStore(id) {
