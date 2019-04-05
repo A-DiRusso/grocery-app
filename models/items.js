@@ -50,10 +50,23 @@ class Item {
                     password = '${this.password}'
                      where id = ${this.id}`);
     }
+    /* this shouldn't be here
     static insertUser (firstName, lastName, email, password) {
         return db.result(`insert into users
         (first_name, last_name, email, password)
         values  ($1, $2, $3, $4)`, [firstName, lastName, email, password])
+    }*/
+
+    static deleteByStoreID(id) {
+        return db.result(`DELETE from items WHERE store_id = $1`,[id])
+    }
+
+    static addItem(name,quantity,comments,storeId) {
+        return db.result(`INSERT into items (store_id, item, quantity,comments) values ($1, $2, $3, $4)`, [storeId, name, quantity,comments]);
+        //then they need to refresh the page
+    }
+    static deleteItem (id) {
+        return db.result(`DELETE from items WHERE id=$1`,[id]);
     }
 
 }
