@@ -10,10 +10,35 @@
 
     <title>Grocery List app</title>
 </head>
+<style>
+
+.jumbotron {
+    padding: 1px;
+
+    background-color: #98ccae;
+    background-color: #b8ffea;
+    background-color: #ffb991 ;
+    color: #5f2f22;
+}
+html {
+    background-color: #b8ffea;
+    background-color: #ffb991 ;
+}
+    .alert-primary {
+    color: #5f2f22;
+    background-color: #b8ffea;
+    border-color: #b8ffea;
+}
+</style>
 <body>
-        <h1>Please sign up for the Grocery Store App </h1>
-        <h2 class="alert alert-primary"> ${(message) ? message : "Sign up"}</h2>
-        <form
+
+    <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Please sign up for the Grocery Store App  <br>
+       </h1>
+            <h2 class="alert alert-primary"> ${(message) ? message : "Sign up"}</h2>
+          <p class="lead text-muted">    
+              <form
         action="/signup"
         method="POST"
         >  
@@ -32,12 +57,19 @@
                         <input required value="" name="firstname" type="text" class="form-control" id="firstnameid" placeholder="FirstName">
                       </div>
                       <div class="form-group">
-                            <label for="lasttnameid">First Name</label>
+                            <label for="lasttnameid">Last Name</label>
                             <input required value="" name="lastname" type="text" class="form-control" id="lasttnameid" placeholder="last name">
                           </div>
     
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
+        </p>
+        </div>
+      </section>
+
+
+
+        
         
 </body>
 </html>

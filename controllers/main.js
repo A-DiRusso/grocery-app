@@ -95,15 +95,21 @@ async function deleteAStore (req, res) {
 
 async function deleteAnItem (req,res) {
     //just need to delete the item from the items table.  it has a unique id
-    console.log("got to deleteAnItem");
-    await Item.deleteItem(req.params.id);
+    console.log("got to deleteAnItem", req.body.id);
+    await Item.deleteItem(parseInt(req.body.id));
+
 
     //get a fresh array of items and reload
     //everything else is stored in sessions
     const arrayOfItems = await Store.items(parseInt(req.session.storeID));
     // console.log("items",arrayOfItems)
         //then render main with session vars and items.
-        res.render('main',{locals:{user:req.session.user,storeid:req.session.storeID,stores:req.session.stores,items:arrayOfItems,storeName:req.session.storeName}})
+        console.log((arrayOfItems));
+    res.render('main',{locals:{user:req.session.user,
+        storeid:req.session.storeID,
+        stores:req.session.stores,
+        items:arrayOfItems,
+        storeName:req.session.storeName}})
 
 
 }
@@ -111,8 +117,47 @@ async function deleteAnItem (req,res) {
 async function addStore (req, res) {
 console.log("we are adding a store")
 console.log(req.body.storename);
-Store.addStore(req.body.storename);
+
+const newStoreID = await Store.addStore(req.body.storename);
 // res.redirect('/main')
+console.log("The new store from sql is ", newStoreID);
+
+//************** */
+await UserStore.addEntry(req.session.userID,parseInt(newStoreID));
+
+///this should be a separate function b/c i call it in delete store an in index.js too....
+let userStores = await User.allStoresByUser(parseInt(req.session.userID));
+
+// let userStores = await req.session.userObject.allStores();  //get a list of stores
+console.log("The userStores after adding are: ", userStores);
+
+//i have no idea why it comes back as undefined here but an empty array in login.js
+//but the HTML rendering can't handle undefined.
+//it does fine with an empty array
+if (userStores === undefined) {
+    userStores = [];
+}
+
+//and resave the stores in session because it has changed
+req.session.stores = userStores;
+req.session.storeID = null;  //current store id
+req.session.storeName =  null;  //current store name
+
+console.log("Saving session variables");
+req.session.save( () => {
+
+    // res.render('main',{locals:{user:req.session.user,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
+    res.render('main',{locals:{user:req.session.user,
+        storeid:null,
+        storeName:null,
+        stores:userStores,
+        items:[]}});
+})
+
+
+
+
+
 }
 
 async function addItem (req, res) {
@@ -122,8 +167,18 @@ console.log("the store id is ", req.params.storeID);
 // await Item.addItem(parseInt(req.params.storeID),req.body.itemname,req.body.quantity,req.body.comments);
 await Item.addItem(req.body.itemname, parseInt(req.body.quantity), req.body.comments, parseInt(req.params.storeID))
     // parseInt(req.params.storeID),req.body.itemname,req.body.quantity,req.body.comments);
+    
+    const arrayOfItems = await Store.items(parseInt(req.session.storeID));
+
+    res.render('main',{locals:{user:req.session.user,
+                    storeid:req.session.storeID,
+                    stores:req.session.stores,
+                    items:arrayOfItems,
+                    storeName:req.session.storeName}})
 
 }
+
+
 module.exports = { loadMainPage,
 deleteAStore,
 deleteAnItem,

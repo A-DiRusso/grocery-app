@@ -12,7 +12,7 @@ const { loadMainPage,
 
 mainRouter.post('/delete/store/:id',deleteAStore);
 
-mainRouter.post('/delete/item/:id', deleteAnItem);
+mainRouter.post('/delete/item', deleteAnItem);
 
 mainRouter.post('/item/add/:storeID', addItem);
 
