@@ -11,6 +11,10 @@
     <title>Grocery List app</title>
 </head>
 <style>
+
+  .hidden {
+    visibility: hidden;
+  }
 .jumbotron {
     padding: 1px;
 
@@ -205,7 +209,10 @@ background-color: white;
                               </ul>
                             </div>
                             <br>
-                              <div class="card-body">
+                              <div class="card-body
+                              
+                              ${(items[0]) ? ' ' : 'hidden'}
+                                " >
                                   <div class="d-flex justify-content-between align-items-center">
                                       <form action="/main/item/add/${storeid}" method="POST">
                                         <input id="itembox" type="text" name="itemname" required>
