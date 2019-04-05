@@ -10,10 +10,34 @@
 
     <title>Grocery List app</title>
 </head>
+<style>
+.jumbotron {
+    padding: 1px;
+
+    background-color: #98ccae;
+    background-color: #b8ffea;
+    background-color: #ffb991 ;
+    color: #5f2f22;
+}
+html {
+    background-color: #b8ffea;
+    background-color: #ffb991 ;
+}
+    .alert-primary {
+    color: #5f2f22;
+    background-color: #b8ffea;
+    border-color: #b8ffea;
+}
+</style>
 <body>
-        <h1>Login to the Grocery Store App </h1>
-        <h2 class="alert alert-primary"> ${(message) ? message : "Please Log in"}</h2>
-        <form
+
+              <section class="jumbotron text-center">
+                  <div class="container">
+                    <h1 class="jumbotron-heading">Login to the Grocery Store App <br>
+                      Write down all the things that you would otherwise forget.</h1>
+                      <h2 class="alert alert-primary"> ${(message) ? message : "Please Log in"}</h2>
+                    <p class="lead text-muted">    
+                                <form
         action="/login"
         method="POST"
         >  
@@ -30,6 +54,15 @@
     
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
-        
+
+                  </p>
+                  </div>
+                </section>
+          
+          
+
+
+
+
 </body>
 </html>
