@@ -14,9 +14,9 @@ mainRouter.post('/delete/store/:id',deleteAStore);
 
 mainRouter.post('/delete/item/:id', deleteAnItem);
 
-mainRouter.post('/add/store', addStore);
+mainRouter.post('/item/add/:storeID', addItem);
 
-mainRouter.post('/add/item', addItem);
+mainRouter.post('/store/add/', addStore);
 
 mainRouter.post('/',loadMainPage);
 

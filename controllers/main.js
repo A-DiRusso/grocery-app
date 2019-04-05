@@ -8,7 +8,15 @@ async function  loadMainPage(req, res) {
     // console.log("we are getting here");
     // console.log(req.session.stores)
     // console.log("This is the store id from form:",req.body.id)
-    const arrayOfItems = await Store.items(parseInt(req.body.id));
+    // if (!req.body.id ) {
+
+    //     req.body.id = req.session.userID
+    // }
+   
+            const arrayOfItems = await Store.items(parseInt(req.body.id));
+    
+    
+
 
 
     console.log("items ",arrayOfItems)
@@ -18,7 +26,8 @@ async function  loadMainPage(req, res) {
     console.log("The store name is", req.session.storeName.storeName);
     req.session.save(  () => {
         //then render main with session vars and items.
-        res.render('main',{locals:{user:req.session.user,stores:req.session.stores,items:arrayOfItems,storeName:req.session.storeName}})
+        // console.log("storeID");
+        res.render('main',{locals:{user:req.session.user,storeid:req.session.storeID,stores:req.session.stores,items:arrayOfItems,storeName:req.session.storeName}})
 
     })
 
@@ -78,7 +87,7 @@ async function deleteAStore (req, res) {
     req.session.save( () => {
 
         // res.render('main',{locals:{user:req.session.user,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
-        res.render('main',{locals:{user:req.session.user,storeName:null,stores:userStores,items:[]}});
+        res.render('main',{locals:{user:req.session.user,storeid:null,storeName:null,stores:userStores,items:[]}});
     })
 
 
@@ -94,16 +103,25 @@ async function deleteAnItem (req,res) {
     const arrayOfItems = await Store.items(parseInt(req.session.storeID));
     // console.log("items",arrayOfItems)
         //then render main with session vars and items.
-        res.render('main',{locals:{user:req.session.user,stores:req.session.stores,items:arrayOfItems,storeName:req.session.storeName}})
+        res.render('main',{locals:{user:req.session.user,storeid:req.session.storeID,stores:req.session.stores,items:arrayOfItems,storeName:req.session.storeName}})
 
 
 }
 
 async function addStore (req, res) {
-
+console.log("we are adding a store")
+console.log(req.body.storename);
+Store.addStore(req.body.storename);
+// res.redirect('/main')
 }
 
 async function addItem (req, res) {
+console.log("now to add an item");
+console.log(req.body.itemname);
+console.log("the store id is ", req.params.storeID);
+// await Item.addItem(parseInt(req.params.storeID),req.body.itemname,req.body.quantity,req.body.comments);
+await Item.addItem(req.body.itemname, parseInt(req.body.quantity), req.body.comments, parseInt(req.params.storeID))
+    // parseInt(req.params.storeID),req.body.itemname,req.body.quantity,req.body.comments);
 
 }
 module.exports = { loadMainPage,
