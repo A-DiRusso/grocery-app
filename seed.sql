@@ -25,6 +25,7 @@ insert into user_stores
 values
 (3,2),
 (3,4),
+(3,1),
 (1,2);
 
 insert into items 

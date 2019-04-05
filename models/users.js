@@ -43,8 +43,9 @@ class User {
                         //this NEW calls the CONSTRUCTOR
                 const userInstance = new User(userData.id, userData.first_name, userData.last_name, userData.email, userData.password);    
                 // console.log(userData.id);
-                // console.log(userInstance);
+                // console.log("The type of user instance", typeof userInstance);
                 return userInstance;    
+                
             })
             .catch((error) => {
                 return null;  //signal an invalid value
@@ -77,7 +78,30 @@ class User {
     checkPassword(password) {
         return bcrypt.compareSync(password,this.password);
     }
-    get stores() {
+    static allStoresByUser(userId){
+        return db.any(`SELECT * from stores as S
+            INNER JOIN user_stores as US 
+            ON S.id = US.store_id
+            INNER JOIN users as U
+            ON US.user_id = U.id
+            where user_id = $1`,[userId])
+            //and transform them to review objects
+                .then((arrayOfStores) => {
+                    //convert each array element into a Review instance
+                    const arrayOfStoreInstances = [];
+                    //manually mapping
+                    arrayOfStores.forEach((data) => {
+                        // console.log(data);
+                        const StoreInstance = new Store (data.store_id,  data.store_name);
+                        arrayOfStoreInstances.push(StoreInstance);
+                    })
+                    // console.log(arrayOfStoreInstances);
+                    return arrayOfStoreInstances;
+                })
+                //what happens when there are NO results??
+    }
+    
+    allStores() {
             return db.any(`SELECT * from stores as S
             INNER JOIN user_stores as US 
             ON S.id = US.store_id

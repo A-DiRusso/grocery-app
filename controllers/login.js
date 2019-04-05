@@ -15,7 +15,7 @@ async function verifyUser  (req, res) {
         const theUser = await User.getByEmail(`${req.body.email}`);
         // console.log(theUser);
     
-        console.log("theUser for bad email", theUser);
+        // console.log("theUser for bad email", theUser);
         //if the user not found, redirect to the signup page
         if (theUser === null) {
             res.redirect('/signup');
@@ -24,7 +24,7 @@ async function verifyUser  (req, res) {
             if (theUser.checkPassword(req.body.password)) {
                 // console.log("PASSWORD VALID");
                 //get the list of stores for that user
-                const userStores = await theUser.stores;  //get a list of stores
+                const userStores = await theUser.allStores();  //get a list of stores
                 console.log("The user stores are", userStores);
                 // console.log(userStores);
                 // console.log(userStores[0].storeName);
@@ -38,7 +38,8 @@ async function verifyUser  (req, res) {
                 req.session.userID = theUser.id;
                 req.session.userObject = theUser;
                 req.session.save( () => {
-                    res.render('main',{locals:{user:theUser.firstName,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
+                    // res.render('main',{locals:{user:theUser.firstName,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
+                    res.render('main',{locals:{user:theUser.firstName,storeName:null,stores:userStores,items:[]}});
 
                 })
             }
