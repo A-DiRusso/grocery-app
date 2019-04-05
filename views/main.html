@@ -50,31 +50,38 @@ form {
                         <div class="card mb-6 shadow-sm" style="overflow-y: auto; max-height: 250px;">
 
                             <ul style="max-height: 200px;min-height: 200px;">
- 
 
-                            ${stores.map((store) =>  `<li  >
-                                <form action="/main" method="POST">
-                                <input name="id" value="${store.id}" style="display:none;">
-                                <button  type="submit" >${store.storeName}</button></form>
-                            
-                                <form  class="deletebutton" action="/deletestore" method="POST">
-                                <input name="id" value="${store.id}" style="display:none;">
-                                <button class="deleteme" styles="text-align:right;"  type="submit" >X</button></form>
-                            
-                            
-                            </li>`).join(' ')}
-        
+                             
+                                
+                                  
+
+                                  ${stores.map((store) =>  `<li  >
+                                      <form action="/main" method="POST">
+                                      <input name="id" value="${store.id}" style="display:none;">
+                                      <button  type="submit" >${store.storeName}</button></form>
+                                  
+                                      <form  class="deletebutton" action="/main/delete/store/${store.id}" method="POST">
+                                      <input name="id" value="${store.id}" style="display:none;">
+                                      <button class="deleteme" styles="text-align:right;"  type="submit" >X</button></form>
+                                  
+                                  
+                                  </li>`).join(' ')}
+              
+
+
+                             
+
                             </ul>
                          
                         </div>
                           <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+
+                          
                             <div class="d-flex justify-content-between align-items-center">
-                              <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                              </div>
-                              <small class="text-muted">9 mins</small>
+                                <form action="/main/store/add" method="POST">
+                                  New Store: <input type="text" name="storename" required>
+                                  <button   type="submit" >create new store</button></form>
+    
                             </div>
                           </div>
                         
@@ -89,28 +96,34 @@ form {
                             </div>
                             <div class="card mb-6 shadow-sm" style="overflow-y: auto; max-height: 250px;">
                               <ul style="max-height: 200px;min-height: 200px;">
-                                    <ul style="max-height: 200px;min-height: 200px;">
 
+                                  ${items.map((item) =>  `<li  >
+                                      <form action="/main" method="POST">
+                                      <input name="id" value="${item.id}" style="display:none;">
+                                      <button  type="submit" >${item.item}</button></form>
+                                  
+                                      <form  class="deletebutton" action="/deleteitem" method="POST">
+                                      <input name="id" value="${item.id}" style="display:none;">
+                                      <button class="deleteme" styles="text-align:right;"  type="submit" >X</button></form>
+                                  
+                                  
+                                  </li>`).join(' ')}
 
-                                          
-                                                    ${items.map((item) =>  `<li>${item.item}</li>`).join(' ')}
-                    
-                                          
             
-                                      </ul>
 
                                  
                               </ul>
                             </div>
                               <div class="card-body">
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                  <div class="d-flex justify-content-between align-items-center">
+                                      <form action="/main/item/add/${storeid}" method="POST">
+                                        Item: <input type="text" name="itemname" required>
+                                        Quantity:<input type="text" name="quantity" >
+                                        Comments:<input type="text" name="comments" >
+                                        <button type="submit" >Add item</button></form>
+          
+                                      
                                   </div>
-                                  <small class="text-muted">9 mins</small>
-                                </div>
                               </div>
                             
                           </div>

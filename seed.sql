@@ -1,10 +1,10 @@
 insert into users
 (first_name, last_name, email, password)
 values
-('Margaret','ONeill','margaret@oneillfish.com','password1'),
+('Margaret','ONeill','margaret@oneillfish.com','$2a$10$ty51jaFTx27lJtYpLyJP4eWesL0Jds8woQN1AR8hkTO6/dpf7qPh2'),
 ('Rob','ONeill','roneill@columbiaprop','password1'),
-('Madeline','ONeill','maddie@oneillcrew.com','password1'),
-('Eileen','Pickett','epickett@gmail.com','password1'),
+('Madeline','ONeill','maddie@oneillcrew.com','$2a$10$fqFAywGYUHeGffolEzrdh.V//lc76UEvgc/BkOw.IDtXONIiCavn.'),
+('Eileen','Pickett','epickett@gmail.com','$2a$10$itEjhJk2o7RLnTJdj1Dpxu5PR9FXKYTI5fgmBqqB43gm3ISE1fm8u'),
 ('Carol','Jantzen','cmjantzen@srs.gov','password1'),
 ('Emily','Sasser','ess@gmail.com','password1'),
 ('Lady', 'Godiva', 'chocobsessed@hotmail.com', 'nakedtruth!'),
@@ -25,6 +25,7 @@ insert into user_stores
 values
 (3,2),
 (3,4),
+(3,1),
 (1,2);
 
 insert into items 

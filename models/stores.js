@@ -2,7 +2,7 @@
 const db = require('./conn');  //requre the conn.js file
 const bcrypt = require('bcryptjs');
 const Item = require('./items');
-const usersStores = require('./users-stores');
+const UserStore = require('./users-stores');
 
 //this will have all the fields as parameters
 //static means all instance of the class have this function
@@ -50,6 +50,7 @@ class Store {
         values  ($1, $2, $3, $4)`, [firstName, lastName, email, password])
     }
 
+    //get all the items for a store iD
     static items(id) {
         return db.any(`SELECT * from items as I
             INNER JOIN stores as S 
@@ -79,10 +80,26 @@ class Store {
             });
             //what happens when there are NO results??
 }
+static addStore(name) {
+    const newStore = db.result(`INSERT into stores (name) values ($1) returning id`, [name]);
+    console.log(newStore);  //we need the ID from this...
+    //add the user-store entry in the user-stores table - this goes in th4e user-stores.js
+    //this needs to add the store to the store table AND
+
+}
+static deleteStore(id) {
+    //this can only happen if you have deleted all items first
+    //and deleted  records in the user-stores table for that STORE.
+    //maybe it should only delete that users reference to the store, if others exist...but not for now
+    db.result(`DELETE from stores where id=$1`,[id])
+    .catch((error) => {
+        console.error(error);
+})
+    
 }
 
 
-
+}
 
 
 module.exports = Store;
