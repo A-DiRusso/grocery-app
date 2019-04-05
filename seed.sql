@@ -1,9 +1,9 @@
 insert into users
 (first_name, last_name, email, password)
 values
-('Margaret','ONeill','margaret@oneillfish.com','password1'),
+('Margaret','ONeill','margaret@oneillfish.com','$2a$10$ty51jaFTx27lJtYpLyJP4eWesL0Jds8woQN1AR8hkTO6/dpf7qPh2'),
 ('Rob','ONeill','roneill@columbiaprop','password1'),
-('Madeline','ONeill','maddie@oneillcrew.com','password1'),
+('Madeline','ONeill','maddie@oneillcrew.com','$2a$10$fqFAywGYUHeGffolEzrdh.V//lc76UEvgc/BkOw.IDtXONIiCavn.'),
 ('Eileen','Pickett','epickett@gmail.com','password1'),
 ('Carol','Jantzen','cmjantzen@srs.gov','password1'),
 ('Emily','Sasser','ess@gmail.com','password1'),

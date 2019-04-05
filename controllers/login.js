@@ -29,6 +29,7 @@ async function verifyUser  (req, res) {
                 req.session.stores = userStores;
                 req.session.user=theUser.firstName;
                 req.session.userID = theUser.id;
+                req.session.userObject = theUser;
                 req.session.save( () => {
                     res.render('main',{locals:{user:theUser.firstName,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
 

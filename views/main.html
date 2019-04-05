@@ -89,15 +89,20 @@ form {
                             </div>
                             <div class="card mb-6 shadow-sm" style="overflow-y: auto; max-height: 250px;">
                               <ul style="max-height: 200px;min-height: 200px;">
-                                    <ul style="max-height: 200px;min-height: 200px;">
 
+                                  ${items.map((item) =>  `<li  >
+                                      <form action="/main" method="POST">
+                                      <input name="id" value="${item.id}" style="display:none;">
+                                      <button  type="submit" >${item.item}</button></form>
+                                  
+                                      <form  class="deletebutton" action="/deleteitem" method="POST">
+                                      <input name="id" value="${item.id}" style="display:none;">
+                                      <button class="deleteme" styles="text-align:right;"  type="submit" >X</button></form>
+                                  
+                                  
+                                  </li>`).join(' ')}
 
-                                          
-                                                    ${items.map((item) =>  `<li>${item.item}</li>`).join(' ')}
-                    
-                                          
             
-                                      </ul>
 
                                  
                               </ul>
