@@ -3,7 +3,7 @@ const db = require('./conn');  //requre the conn.js file
 const bcrypt = require('bcryptjs');
 const Store = require('./stores');
 const Item = require('./items');
-const usersStores = require('./users-stores');
+const UserStore = require('./users-stores');
 
 //this will have all the fields as parameters
 //static means all instance of the class have this function

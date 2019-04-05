@@ -2,7 +2,7 @@
 const db = require('./conn');  //requre the conn.js file
 const bcrypt = require('bcryptjs');
 const Item = require('./items');
-const usersStores = require('./users-stores.js');
+const UserStore = require('./users-stores');
 
 //this will have all the fields as parameters
 //static means all instance of the class have this function
@@ -91,7 +91,7 @@ static deleteStore(id) {
     //this can only happen if you have deleted all items first
     //and deleted  records in the user-stores table for that STORE.
     //maybe it should only delete that users reference to the store, if others exist...but not for now
-    const db.return(`DELETE from stores where id=$1`,[id]);
+    db.return(`DELETE from stores where id=$1`,[id]);
 
 }
     

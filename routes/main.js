@@ -17,6 +17,8 @@ mainRouter.post('/delete/item/:id', deleteAnItem);
 
 mainRouter.post('/add/store', addStore);
 
-mainRouter.post('/add/item', addItem)
+mainRouter.post('/add/item', addItem);
+
+
 
 module.exports = mainRouter;
