@@ -36,10 +36,19 @@ async function verifyUser  (req, res) {
                 req.session.stores = userStores;
                 req.session.user=theUser.firstName;
                 req.session.userID = theUser.id;
+                
+                // console.log("testing if theUser is a User object");
+                // console.log(theUser instanceof User);
                 req.session.userObject = theUser;
+
+
                 req.session.save( () => {
                     // res.render('main',{locals:{user:theUser.firstName,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
+                    
+                    // console.log("testing if req.session.userObject is a User object");
+                    // console.log(req.session.userObject instanceof User);       
                     res.render('main',{locals:{user:theUser.firstName,storeName:null,storeid:null,stores:userStores,items:[]}});
+
 
                 })
             }
