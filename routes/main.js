@@ -9,9 +9,8 @@ const { loadMainPage,
     addStore,
     addItem} = require('../controllers/main');
 
-mainRouter.post('/',loadMainPage);
 
-mainRouter.post('./delete/store/:id',deleteAStore);
+mainRouter.post('/delete/store/:id',deleteAStore);
 
 mainRouter.post('/delete/item/:id', deleteAnItem);
 
@@ -19,6 +18,7 @@ mainRouter.post('/add/store', addStore);
 
 mainRouter.post('/add/item', addItem);
 
+mainRouter.post('/',loadMainPage);
 
 
 module.exports = mainRouter;

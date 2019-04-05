@@ -30,7 +30,7 @@ app.use('/login',loginRouter);
 //sign up page
 app.use('/signup', signUpRouter);
 
-app.use('/main',mainRouter);
+app.use('/main/',mainRouter);
 
 //default for all other pages'
 app.all('*',(req, res) => {

@@ -21,9 +21,12 @@ async function verifyUser  (req, res) {
                 // console.log("PASSWORD VALID");
                 //get the list of stores for that user
                 const userStores = await theUser.stores;  //get a list of stores
-
+                console.log("The user stores are", userStores);
                 // console.log(userStores);
                 // console.log(userStores[0].storeName);
+
+                //what is store is empty??? 
+                // console.log("The Stores is Empty", userStores)
 
                 //store the store array in session
                 req.session.stores = userStores;

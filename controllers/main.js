@@ -25,22 +25,38 @@ async function  loadMainPage(req, res) {
 }
 
 async function deleteAStore (req, res) {
+    console.log("Got to delteAStore");
     //the id will come on the req.params.id
-    const storeID = req.params.id
+    const storeID = req.params.id;
     console.log("The store id to delete is ",storeID);
 
     //to delete a store, you need to delete all items for that store
     await Item.deleteByStoreID(storeID);
+    console.log("items are deleted")
+    
 
     //then delete the user-store references
     await UserStore.deleteAllStoreID(storeID);
+    console.log("user store is deleted");
+
 
     //then delete the store record...
     await Store.deleteStore(storeID);
+    console.log("The store is deleted");
+
+
+    console.log("The user object", req.session.userObject);
 
     //then re-render the main page with the new list of stores
-    const userStores = await req.session.userObject.stores;  //get a list of stores
+    let userStores = await req.session.userObject.stores;  //get a list of stores
 
+    //i have no idea why it comes back as undefined here but an empty array in login.js
+    //but the HTML rendering can't handle undefined.
+    //it does fine with an empty array
+    if (userStores === undefined) {
+        userStores = [];
+    }
+    // console.log("the userStores are", userStores);
     //re pull the stores based on req.sessions.id -- this is the user id.
 
     //and resave the stores in session because it has changed
@@ -48,6 +64,7 @@ async function deleteAStore (req, res) {
     req.session.storeID = null;  //current store id
     req.session.storeName =  null;  //current store name
 
+    console.log("Saving session variables");
     req.session.save( () => {
 
         res.render('main',{locals:{user:req.session.user,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
@@ -58,6 +75,7 @@ async function deleteAStore (req, res) {
 
 async function deleteAnItem (req,res) {
     //just need to delete the item from the items table.  it has a unique id
+    console.log("got to deleteAnItem");
     await Item.deleteItem(req.params.id);
 
     //get a fresh array of items and reload

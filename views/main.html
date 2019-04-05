@@ -50,20 +50,27 @@ form {
                         <div class="card mb-6 shadow-sm" style="overflow-y: auto; max-height: 250px;">
 
                             <ul style="max-height: 200px;min-height: 200px;">
- 
 
-                            ${stores.map((store) =>  `<li  >
-                                <form action="/main" method="POST">
-                                <input name="id" value="${store.id}" style="display:none;">
-                                <button  type="submit" >${store.storeName}</button></form>
-                            
-                                <form  class="deletebutton" action="/deletestore" method="POST">
-                                <input name="id" value="${store.id}" style="display:none;">
-                                <button class="deleteme" styles="text-align:right;"  type="submit" >X</button></form>
-                            
-                            
-                            </li>`).join(' ')}
-        
+                             
+                                
+                                  
+
+                                  ${stores.map((store) =>  `<li  >
+                                      <form action="/main" method="POST">
+                                      <input name="id" value="${store.id}" style="display:none;">
+                                      <button  type="submit" >${store.storeName}</button></form>
+                                  
+                                      <form  class="deletebutton" action="/main/delete/store/${store.id}" method="POST">
+                                      <input name="id" value="${store.id}" style="display:none;">
+                                      <button class="deleteme" styles="text-align:right;"  type="submit" >X</button></form>
+                                  
+                                  
+                                  </li>`).join(' ')}
+              
+
+
+                             
+
                             </ul>
                          
                         </div>
