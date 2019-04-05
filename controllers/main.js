@@ -63,8 +63,15 @@ async function deleteAStore (req, res) {
 
     //this simply doesn't work
     //the saved object in the sessions doesn't appear to retain the fact that it is an intance of User?
+    //NOPE - somewhere along the way, the saved instance in sessions LOSES the methods that were associated
+    //with the object.  it basically just exists as a dictionary.
+    // console.log(req.session.userObject.allStores())
 
     let userStores = await User.allStoresByUser(parseInt(req.session.userID));
+
+    // let userStores = req.session.userObject.allStores();
+    console.log("what is the userObject now?")
+    console.log(req.session.userObject instanceof User);
 
     // let userStores = await req.session.userObject.allStores();  //get a list of stores
     console.log("The userStores after deleting are: ", userStores);
