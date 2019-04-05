@@ -24,12 +24,37 @@ form {
 }
 
 .deleteme {
-    background-color:yellow;
-    color: red;
+    background-color:#f6fafa;
+    color:lightcoral;
     font-style: bold;
 
 }
+ul {
+  list-style-type:none;
+  padding-left:5px;
+}
+.storebutton {
+  background-color:white;
+  border-color:grey;
+    border-style: solid;
+    border-width: 1px;
+    padding: 1px 7px 2px;
+    min-width: 90%;
+    max-width: 90%;
+    text-align: left;
+    
+}
+.storebutton:hover {
+  background-color:#f6fafa;
+}
 
+.itembutton {
+  border-color:white;
+    border-style: solid;
+    border-width: 1px;
+    padding: 1px 7px 2px;
+
+}
 </style>
 <body>
         <main role="main">
@@ -58,7 +83,7 @@ form {
                                   ${stores.map((store) =>  `<li  >
                                       <form action="/main" method="POST">
                                       <input name="id" value="${store.id}" style="display:none;">
-                                      <button  type="submit" >${store.storeName}</button></form>
+                                      <button class="storebutton" type="submit" >${store.storeName}</button></form>
                                   
                                       <form  class="deletebutton" action="/main/delete/store/${store.id}" method="POST">
                                       <input name="id" value="${store.id}" style="display:none;">
@@ -100,7 +125,7 @@ form {
                                   ${items.map((item) =>  `<li  >
                                       <form action="/main" method="POST">
                                       
-                                      <button  type="button" >${item.item}</button></form>
+                                      <button class="itembutton" type="button" >${item.item}</button></form>
                                   
                                       <form  class="deletebutton" action="/main/delete/item" method="POST">
                                       <input name="id" value="${item.id}" style="display:none;">
