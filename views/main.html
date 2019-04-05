@@ -13,25 +13,58 @@
 <style>
 .jumbotron {
     padding: 1px;
-}
 
+    background-color: #98ccae;
+    background-color: #b8ffea;
+    color: #5f2f22;
+}
+p.lead.text-muted {
+    color:#5f2f22 !important;
+
+}
+.bg-light {
+    background-color: #ffb991 !important;
+}
 form {
     display: inline;
+    background-color:#fedccb;
+    color:#5f2f22;
+}
+
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem #fedccb !important;
+}
+.row {
+  background-color:#fedccb;
+    color:#5f2f22;
 
 }
 .deletebutton {
     float:right;
+    padding-right:10px;
 }
 
 .deleteme {
     background-color:#f6fafa;
+    background-color:#b8ffea;
     color:lightcoral;
+    color:#ff7991;
     font-style: bold;
 
 }
-ul {
+ul, li {
   list-style-type:none;
   padding-left:5px;
+  background-color:rgba(255,185,152,.5);
+  background-color:#fedccb;
+    color:#5f2f22;
+
+}
+
+.card.mb-6.shadow-sm {
+  background-color:#fedccb;
+    color:#5f2f22;
+
 }
 .storebutton {
   background-color:white;
@@ -39,13 +72,18 @@ ul {
     border-style: solid;
     border-width: 1px;
     padding: 1px 7px 2px;
-    min-width: 90%;
-    max-width: 90%;
+    min-width: 85%;
+    max-width: 85%;
     text-align: left;
+    background-color:#fedccb;
+  
+  color:#5f2f22;
+
     
 }
 .storebutton:hover {
-  background-color:#f6fafa;
+  background-color:#6fb39e;
+  color:#d1fff1;
 }
 
 .itembutton {
@@ -53,8 +91,33 @@ ul {
     border-style: solid;
     border-width: 1px;
     padding: 1px 7px 2px;
+    background-color:#fedccb;
+  
+  color:#5f2f22;
+}
+form input {
+  background-color:#fedccb;
+  
+  color:#5f2f22;
+  float:right;
 
 }
+.card-body {
+  /* border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186); */
+    /* border-style: solid;
+    border-width: 1px;
+    padding: 1px 7px 2px; */
+background-color: white;
+    height: 150px;
+
+  background-color:#fedccb;
+  
+    color:#5f2f22;
+
+    padding: .75rem;
+
+}
+
 </style>
 <body>
         <main role="main">
@@ -99,12 +162,14 @@ ul {
                             </ul>
                          
                         </div>
+                        <br>
                           <div class="card-body">
 
                           
                             <div class="d-flex justify-content-between align-items-center">
-                                <form action="/main/store/add" method="POST">
+                                <form class="mystoreform" action="/main/store/add" method="POST">
                                   New Store: <input type="text" name="storename" required>
+                                  <BR><BR><BR><BR>
                                   <button   type="submit" >create new store</button></form>
     
                             </div>
@@ -139,12 +204,20 @@ ul {
                                  
                               </ul>
                             </div>
+                            <br>
                               <div class="card-body">
                                   <div class="d-flex justify-content-between align-items-center">
                                       <form action="/main/item/add/${storeid}" method="POST">
-                                        Item: <input type="text" name="itemname" required><br>
-                                        Quantity:<input type="numbrer" value=1 name="quantity" ><br>
-                                        Comments:<input type="text" name="comments" >
+                                        <input id="itembox" type="text" name="itemname" required>
+                                        <label for="itembox">Item</label>
+                                        <br>
+
+                                        <input id="quantbox" type="numbrer" value=1 name="quantity" >
+                                        <label for="quantbox">Quantity</label>
+                                        <br>
+
+                                        <input id="commentbox" type="text" name="comments" >
+                                        <label for="commentbox">Comments</label>
                                         <button type="submit" >Add item</button></form>
           
                                       
