@@ -52,10 +52,14 @@ class Store {
 
     //get all the items for a store iD
     static items(id) {
-        return db.any(`SELECT * from items as I
-            INNER JOIN stores as S 
-            ON I.store_id = S.id
-            where S.id = $1`, [id])
+        return db.any(`SELECT I.id as id, S.id as store_id, I.item as item, I.quantity as quantity, I.comments as comments, I.checked as checked from items as I
+        INNER JOIN stores as S 
+        ON I.store_id = S.id
+        where S.id = $1`, [id])
+
+            
+
+
         //and transform them to review objects
             .then((arrayOfItems) => {
                 //convert each array element into a Review instance

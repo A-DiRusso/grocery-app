@@ -95,15 +95,21 @@ async function deleteAStore (req, res) {
 
 async function deleteAnItem (req,res) {
     //just need to delete the item from the items table.  it has a unique id
-    console.log("got to deleteAnItem");
-    await Item.deleteItem(req.params.id);
+    console.log("got to deleteAnItem", req.body.id);
+    await Item.deleteItem(parseInt(req.body.id));
+
 
     //get a fresh array of items and reload
     //everything else is stored in sessions
     const arrayOfItems = await Store.items(parseInt(req.session.storeID));
     // console.log("items",arrayOfItems)
         //then render main with session vars and items.
-        res.render('main',{locals:{user:req.session.user,storeid:req.session.storeID,stores:req.session.stores,items:arrayOfItems,storeName:req.session.storeName}})
+        console.log((arrayOfItems));
+    res.render('main',{locals:{user:req.session.user,
+        storeid:req.session.storeID,
+        stores:req.session.stores,
+        items:arrayOfItems,
+        storeName:req.session.storeName}})
 
 
 }
@@ -122,8 +128,18 @@ console.log("the store id is ", req.params.storeID);
 // await Item.addItem(parseInt(req.params.storeID),req.body.itemname,req.body.quantity,req.body.comments);
 await Item.addItem(req.body.itemname, parseInt(req.body.quantity), req.body.comments, parseInt(req.params.storeID))
     // parseInt(req.params.storeID),req.body.itemname,req.body.quantity,req.body.comments);
+    
+    const arrayOfItems = await Store.items(parseInt(req.session.storeID));
+
+    res.render('main',{locals:{user:req.session.user,
+                    storeid:req.session.storeID,
+                    stores:req.session.stores,
+                    items:arrayOfItems,
+                    storeName:req.session.storeName}})
 
 }
+
+
 module.exports = { loadMainPage,
 deleteAStore,
 deleteAnItem,
