@@ -3,6 +3,10 @@ const Store = require('../models/stores');
 const Item = require('../models/items');
 const UserStore = require('../models/users-stores');
 
+
+
+const escapeHtml = require('../utils');
+
 async function  loadMainPage(req, res) {
     //get items first
     // console.log("we are getting here");
@@ -171,8 +175,15 @@ async function addItem (req, res) {
 console.log("now to add an item");
 console.log(req.body.itemname);
 console.log("the store id is ", req.params.storeID);
+
+
+//remove any html scripting from user input:
+const theComments = escapeHtml(req.body.comments);
+const theItem = escapeHtml(req.body.itemname);
+
 // await Item.addItem(parseInt(req.params.storeID),req.body.itemname,req.body.quantity,req.body.comments);
-await Item.addItem(req.body.itemname, parseInt(req.body.quantity), req.body.comments, parseInt(req.params.storeID))
+// await Item.addItem(req.body.itemname, parseInt(req.body.quantity), req.body.comments, parseInt(req.params.storeID))
+await Item.addItem(theItem, parseInt(req.body.quantity), theComments, parseInt(req.params.storeID))
     // parseInt(req.params.storeID),req.body.itemname,req.body.quantity,req.body.comments);
     
     const arrayOfItems = await Store.items(parseInt(req.session.storeID));

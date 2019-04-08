@@ -2,6 +2,16 @@ const express = require('express');
 const PORT =3500;
 const app = express();
 
+
+// const escapeHtml = require('./utils');
+
+//this module will protect our html headers from
+//revealing too much information
+const helmet = require('helmet');
+app.use(helmet());
+
+
+
 const es6Renderer = require('express-es6-template-engine');
 app.engine('html', es6Renderer);
 app.set('views','./views');
