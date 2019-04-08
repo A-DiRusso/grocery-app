@@ -9,12 +9,19 @@
             }  
           });
         
-        
+        /*
         const options = {
             host: 'localhost',
             database: 'grocery-app'
         
         };
+        */
+       const options = {
+        host: process.env.DB_HOST,
+        database: process.env.DB_NAME
+      
+      };
+      
         
         const db = pgp(options);
         
